@@ -30,15 +30,5 @@ namespace WarframeMasteryTracker
                 item.IsMastered = !item.IsMastered;
             }
         }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Dapper;
+﻿using System.IO;
+
+using Dapper;
 using Microsoft.Data.Sqlite;
 using WarframeMasteryTracker.Models;
 
@@ -7,7 +9,7 @@ namespace WarframeMasteryTracker.Data;
 public class ItemsRepository
 {
     private readonly string _connectionString =
-        "Data Source=warframe_mastery.db";
+        $"Data Source={Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "warframe_mastery.db")}";
 
     private SqliteConnection GetConnection()
         => new SqliteConnection(_connectionString);

@@ -1,11 +1,15 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Dapper;
+using Microsoft.Data.Sqlite;
+using System.IO;
 
 public static class DatabaseInitializer
 {
-    private const string DbFile = "warframe_mastery.db";
+    private static readonly string DbFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "warframe_mastery.db");
 
     public static void Initialize()
     {
+        bool dbExists = File.Exists(DbFile);
+
         using var connection = new SqliteConnection($"Data Source={DbFile}");
         connection.Open();
 
@@ -31,7 +35,15 @@ public static class DatabaseInitializer
 
             INSERT OR IGNORE INTO UserProfile (Id, CurrentMastery)
             VALUES (1, 0);
-            ";
+        ";
         command.ExecuteNonQuery();
+
+        // 🔹 IMPORTAR SOLO SI LA TABLA ESTÁ VACÍA
+        var itemCount = connection.QuerySingle<int>("SELECT COUNT(1) FROM Items");
+        if (itemCount == 0)
+        {
+            WarframeItemsImporter.Import();
+        }
+
     }
 }

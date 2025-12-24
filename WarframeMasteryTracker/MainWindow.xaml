@@ -341,8 +341,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             CanUserAddRows="False">
-
-            <DataGrid.Columns Binding="{Binding IsMastered}">
+            <DataGrid.Columns>
                 <DataGridTemplateColumn Header="" Width="50">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -7,13 +7,11 @@ using System.Windows;
 
 public static class WarframeItemsImporter
 {
-    private const string DbFile = "warframe_mastery.db";
-    private const string JsonPath = "Assets/json";
+    private static readonly string DbFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "warframe_mastery.db");
+    private static readonly string JsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets/json");
 
     public static void Import()
     {
-        MessageBox.Show("IMPORTER SE ESTÁ EJECUTANDO");
-
         using var connection = new SqliteConnection($"Data Source={DbFile}");
         connection.Open();
 
